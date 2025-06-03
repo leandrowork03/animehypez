@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Container } from "../../components/container";
 import { Panel } from "../../components/panelheader";
-import { useContext } from "react";
 import { AuthContext } from "../../contexts/authContext";
 
 export function Profile() {
-    const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   const [avatar, setAvatar] = useState<string | null>(null);
 
   useEffect(() => {
@@ -17,21 +16,25 @@ export function Profile() {
 
   return (
     <Container>
-        <Panel/>
-    <div className="p-10" style={{ backgroundColor: 'rgba(0, 0, 0, 0.95)' }}>
-       <header className="text-white w-full flex flex-col border-b border-white">
-
-           {avatar ? (
-        <img src={avatar} alt="Avatar" className="w-24 h-24 rounded-full" />
-      ) : (
-        <p className="text-white">Nenhum avatar selecionado</p>
-      )}
-      <h2 className="font-black text-2xl">
-  {user?.name.charAt(0).toUpperCase() + user?.name.slice(1)}
-</h2>
-       </header>
-    </div>
+      <Panel />
+      <div className="p-10" style={{ backgroundColor: 'rgba(0, 0, 0, 0.95)' }}>
+        <header className="text-white w-full flex flex-col border-b border-white">
+          {avatar ? (
+            <img src={avatar} alt="Avatar" className="w-24 h-24 rounded-full" />
+          ) : (
+            <p className="text-white">Nenhum avatar selecionado</p>
+          )}
+          <h2 className="font-black text-2xl">
+            {user?.name?.charAt(0).toUpperCase() + user?.name?.slice(1)}
+          </h2>
+        </header>
+            {user?.bio && (
+        <div className="mt-5 max-w-xs">
+                <h2 className="text-white text-2xl">Bio</h2>
+          <p className="text-white mt-1  italic">{user.bio}</p>
+        </div>
+        )}
+      </div>
     </Container>
   );
 }
-
