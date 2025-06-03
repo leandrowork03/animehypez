@@ -42,7 +42,7 @@ export function Register() {
         displayName: data.name
       })
 
-      navigate("/dashboard") // Redireciona após registro
+      navigate("/login") // Redireciona após registro
     } catch (error) {
       console.error("Erro ao registrar:", error)
       alert("Erro ao registrar. Verifique os dados ou tente novamente.")

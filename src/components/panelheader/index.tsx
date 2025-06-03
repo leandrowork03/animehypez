@@ -10,7 +10,7 @@ export function Panel(){
 
 
   return(
-    <div className="w-full items-center flex h-10 bg-red-500 rounded-lg text-white font-medium gap-4 px-4 mb-4 mt-4">
+    <div className="w-full items-center flex h-10 bg-blue-600 rounded-lg text-white font-medium gap-4 px-4 mb-4 mt-4">
       <Link to="/profile">
         Perfil
       </Link>
