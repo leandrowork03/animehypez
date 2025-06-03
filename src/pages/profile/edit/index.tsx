@@ -1,6 +1,5 @@
-
-//profile/edit
-import { useState, useEffect, useContext } from "react";
+// src/pages/profile/edit.tsx
+import { useState, useEffect, useContext, ChangeEvent } from "react";
 import { Container } from "../../../components/container";
 import { Panel } from "../../../components/panelheader";
 import goku from '../../../assets/goku.jpg'
@@ -14,6 +13,7 @@ export function Edit() {
   const { user, setUser } = useContext(AuthContext);
   const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
   const [bio, setBio] = useState<string>("");
+  const [uploadedAvatar, setUploadedAvatar] = useState<string | null>(null);
 
   useEffect(() => {
     const savedAvatar = localStorage.getItem("profileAvatar");
@@ -28,8 +28,24 @@ export function Edit() {
 
   function handleSelectAvatar(avatar: string) {
     setSelectedAvatar(avatar);
+    setUploadedAvatar(null); // zera upload se escolher avatar padrão
     localStorage.setItem("profileAvatar", avatar);
     alert("Avatar salvo com sucesso!");
+  }
+
+  function handleUploadAvatar(e: ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64 = reader.result as string;
+        setUploadedAvatar(base64);
+        setSelectedAvatar(base64);
+        localStorage.setItem("profileAvatar", base64);
+        alert("Avatar enviado e salvo com sucesso!");
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   function handleSaveBio() {
@@ -56,9 +72,27 @@ export function Edit() {
             }`}
           />
         ))}
+        {/* Preview do upload */}
+        {uploadedAvatar && (
+          <img
+            src={uploadedAvatar}
+            alt="Avatar enviado"
+            className="w-20 h-20 rounded-full border-4 border-blue-500"
+          />
+        )}
       </div>
 
-      <h2 className="text-white font-bold mb-2 text-xl">Sua bio:</h2>
+      <label className="block text-white font-bold mb-2 cursor-pointer">
+        Enviar imagem personalizada:
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleUploadAvatar}
+          className="block mt-2 text-sm text-white"
+        />
+      </label>
+
+      <h2 className="text-white font-bold mb-2 text-xl mt-6">Sua bio:</h2>
       <textarea
         value={bio}
         onChange={(e) => setBio(e.target.value)}
@@ -75,3 +109,4 @@ export function Edit() {
     </Container>
   );
 }
+

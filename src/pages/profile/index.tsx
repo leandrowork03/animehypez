@@ -1,3 +1,4 @@
+// src/pages/profile/index.tsx
 import { useEffect, useState, useContext } from "react";
 import { Container } from "../../components/container";
 import { Panel } from "../../components/panelheader";
@@ -28,13 +29,16 @@ export function Profile() {
             {user?.name?.charAt(0).toUpperCase() + user?.name?.slice(1)}
           </h2>
         </header>
-            {user?.bio && (
-        <div className="mt-5 max-w-xs">
-                <h2 className="text-white text-2xl">Bio</h2>
-          <p className="text-white mt-1  italic">{user.bio}</p>
-        </div>
+
+        {user?.bio && (
+          <div className="mt-5 max-w-xs">
+            <h2 className="text-white text-2xl">Bio</h2>
+            <p className="text-white mt-1 italic">{user.bio}</p>
+          </div>
         )}
       </div>
     </Container>
   );
 }
+
+

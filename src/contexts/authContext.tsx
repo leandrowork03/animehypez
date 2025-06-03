@@ -1,5 +1,5 @@
-import { createContext, useState, useEffect } from 'react'
-import type { ReactNode } from 'react'
+// src/contexts/authContext.tsx
+import { createContext, useState, useEffect, ReactNode } from 'react'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { Auth } from '../services/firebaseConnections'
 
@@ -11,7 +11,7 @@ interface UserProps {
   uid: string
   name: string | null
   email: string | null
-  bio?: string | null
+  bio?: string
 }
 
 interface AuthContextData {
@@ -19,7 +19,7 @@ interface AuthContextData {
   loadingAuth: boolean
   user: UserProps | null
   logout: () => Promise<void>
-  setUser: React.Dispatch<React.SetStateAction<UserProps | null>>
+  setUser: React.Dispatch<React.SetStateAction<UserProps | null>> // <-- expor setUser
 }
 
 export const AuthContext = createContext({} as AuthContextData)
@@ -31,12 +31,14 @@ function AuthProvider({ children }: AuthProviderProps) {
   useEffect(() => {
     const unsub = onAuthStateChanged(Auth, (firebaseUser) => {
       if (firebaseUser) {
-        const savedBio = localStorage.getItem(`bio_${firebaseUser.uid}`);
+        // ao carregar o usuário, já busca bio do localStorage se existir
+        const savedBio = localStorage.getItem(`bio_${firebaseUser.uid}`) || undefined
+
         setUser({
           uid: firebaseUser.uid,
           name: firebaseUser.displayName,
           email: firebaseUser.email,
-          bio: savedBio || null
+          bio: savedBio,
         })
       } else {
         setUser(null)
@@ -68,3 +70,4 @@ function AuthProvider({ children }: AuthProviderProps) {
 }
 
 export default AuthProvider
+
