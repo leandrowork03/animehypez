@@ -5,6 +5,7 @@ import { Details } from "./pages/details";
 import { Profile } from "./pages/profile";
 import { Register } from "./pages/register";
 import { Login } from "./pages/login";
+import { Edit } from "./pages/profile/edit";
 
 import { Layout } from "./components/layout";
 
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path:'/profile',
         element:<Private><Profile/></Private>
+      },
+      {
+        path:'/profile/edit',
+        element:<Private><Edit/></Private>
       }
     ]
   },

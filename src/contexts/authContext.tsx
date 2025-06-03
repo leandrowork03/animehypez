@@ -64,3 +64,4 @@ function AuthProvider({ children }: AuthProviderProps) {
 }
 
 export default AuthProvider
+
