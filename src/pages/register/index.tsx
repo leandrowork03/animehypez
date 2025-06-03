@@ -9,7 +9,10 @@ import { Auth } from '../../services/firebaseConnections'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 
 const schema = z.object({
-  name: z.string().nonempty("Nome é obrigatório"),
+  name: z
+    .string()
+    .nonempty("Nome é obrigatório")
+    .max(14, "O nome deve ter no máximo 14 letras"),
   email: z.string().email("Digite um email válido").nonempty("Email é obrigatório"),
   password: z.string().min(6, "A senha deve ter pelo menos 6 caracteres")
 })
@@ -66,6 +69,7 @@ export function Register() {
               name="name"
               error={errors.name?.message}
               register={register}
+              maxLength={14} // limite máximo de 14 letras na digitação
             />
 
             <Input

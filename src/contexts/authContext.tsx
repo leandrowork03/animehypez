@@ -1,65 +1,66 @@
-import { createContext, useState, useEffect } from 'react'
+// src/contexts/authContext.tsx
+import { createContext, useState, useEffect} from 'react'
 import type { ReactNode } from 'react'
-import { onAuthStateChanged } from 'firebase/auth'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { Auth } from '../services/firebaseConnections'
 
-interface AuthProviderProps{
+interface AuthProviderProps {
   children: ReactNode
 }
 
-type AuthContextData = {
-  signed: boolean;
-  loadingAuth: boolean;
+interface UserProps {
+  uid: string
+  name: string | null
+  email: string | null
 }
 
-interface UserProps{
-  uid: string;
-  name: string | null;
-  email: string | null;
+interface AuthContextData {
+  signed: boolean
+  loadingAuth: boolean
+  user: UserProps | null
+  logout: () => Promise<void>
 }
 
 export const AuthContext = createContext({} as AuthContextData)
 
-function AuthProvider({ children }:  AuthProviderProps){
-  const [user, setUser] = useState<UserProps | null>(null);
-  const [loadingAuth, setLoadingAuth] = useState(true);
+function AuthProvider({ children }: AuthProviderProps) {
+  const [user, setUser] = useState<UserProps | null>(null)
+  const [loadingAuth, setLoadingAuth] = useState(true)
 
   useEffect(() => {
-
-    const unsub = onAuthStateChanged(Auth, (user) => {
-      if(user){
+    const unsub = onAuthStateChanged(Auth, (firebaseUser) => {
+      if (firebaseUser) {
         setUser({
-          uid: user.uid,
-          name: user?.displayName,
-          email: user?.email
+          uid: firebaseUser.uid,
+          name: firebaseUser.displayName,
+          email: firebaseUser.email
         })
-
-        setLoadingAuth(false);
-
-      }else{
-        setUser(null);
-        setLoadingAuth(false);
+      } else {
+        setUser(null)
       }
-
-
+      setLoadingAuth(false)
     })
 
-    return () => {
-      unsub();
-    }
-
+    return () => unsub()
   }, [])
 
-  return(
-    <AuthContext.Provider 
-    value={{ 
-      signed: !!user,
-      loadingAuth,
-    }}
+  async function logout() {
+    await signOut(Auth)
+    setUser(null)
+  }
+
+  return (
+    <AuthContext.Provider
+      value={{
+        signed: !!user,
+        loadingAuth,
+        user,
+        logout
+      }}
     >
       {children}
     </AuthContext.Provider>
   )
 }
 
-export default AuthProvider;
+export default AuthProvider
