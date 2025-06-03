@@ -17,6 +17,9 @@ export function Panel(){
       <Link to="/profile/edit">
         editar
       </Link>
+      <Link to='/'>
+      Animes
+      </Link>
 
       <button className="ml-auto"  onClick={handleLogout}>
         Sair da conta

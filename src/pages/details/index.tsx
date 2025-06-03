@@ -4,8 +4,14 @@ import type { animeProps } from "../home"
 import { useEffect, useState } from "react"
 import { LuPopcorn } from "react-icons/lu"
 import { TbRating18Plus } from "react-icons/tb"
+import { IoMdAddCircleOutline } from "react-icons/io";
+import toast from "react-hot-toast"
+import { useContext } from "react"
+import { AnimeContext } from "../../contexts/animeContext"
+
 
 export function Details() {
+  const {addItem} = useContext(AnimeContext)
   const [anime, setAnime] = useState<animeProps>()
   const [loading, setLoading] = useState(true)
   const { mal_id } = useParams()
@@ -24,6 +30,10 @@ export function Details() {
     };
     List()
   }, [mal_id]);
+
+  function adicionar(anime){
+    addItem(anime)
+  }
 
   let proofNote;
   let age;
@@ -87,6 +97,14 @@ export function Details() {
               <h1 className="text-2xl font-bold">{anime.title}</h1>
               <h2 className="text-lg italic mb-2">{anime.title_japanese}</h2>
               <p className="py-5">{anime.synopsis}</p>
+            <div className="flex items-center gap-5">
+              <h2 className="font-black text-2xl">
+                Add to your anime list
+              </h2>
+              <button className="hover:text-green-500" onClick={()=>adicionar(anime)}> 
+                <IoMdAddCircleOutline size={35}/>
+              </button>
+            </div>
             </div>
           </div>
         )}

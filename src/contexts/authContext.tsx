@@ -1,5 +1,6 @@
 // src/contexts/authContext.tsx
-import { createContext, useState, useEffect, ReactNode } from 'react'
+import { createContext, useState, useEffect}from 'react'
+import type { ReactNode } from 'react'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { Auth } from '../services/firebaseConnections'
 
@@ -70,4 +71,5 @@ function AuthProvider({ children }: AuthProviderProps) {
 }
 
 export default AuthProvider
+
 

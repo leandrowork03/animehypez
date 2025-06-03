@@ -4,7 +4,10 @@ import { FaSearch } from "react-icons/fa";
 import { LuPopcorn } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { TbRating18Plus } from "react-icons/tb"
-
+import { IoMdAddCircleOutline } from "react-icons/io";
+import { AnimeContext } from "../../contexts/animeContext";
+import { useContext } from "react";
+import toast from "react-hot-toast";
 
 export interface animeProps {
   mal_id: number;
@@ -23,6 +26,7 @@ export interface animeProps {
 }
 
 export function Home() {
+  const{addItem} = useContext(AnimeContext)
   const [anime, setAnime] = useState<animeProps[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -50,6 +54,11 @@ export function Home() {
       </main>
     </Container>
     )
+  }
+
+  function adicionar(item:animeProps){
+    toast.success('Anime add to your profile')
+    addItem(item)
   }
 
   return (
@@ -112,17 +121,18 @@ export function Home() {
             }
 
           return (
-           <Link to={`/details/${item.mal_id}`}>
             <section
               className="px-4 bg-black text-white p-4 rounded-lg hover:scale-103 transition-all flex flex-col justify-around"
               key={item.mal_id}
             >
+           <Link to={`/details/${item.mal_id}`}>
               <img
                 src={item.images.jpg.image_url}
                 alt={item.title}
                 className="w-50 h-70 mx-auto mb-4 rounded-lg"
               />
-
+              <p className="text-center font-black">click over to details</p>
+            </Link>
               <div>
                 <strong className="text-purple-500">{item.title}</strong>
                 <b className="mx-1">/</b>
@@ -135,8 +145,13 @@ export function Home() {
               <p className="text-xs">{age}</p>
               <hr className="my-1" />
               <strong>{item.status}</strong>
+              <hr className="my-1" />
+              <div className="flex gap-3 items-center">
+                <p>Add to favorities? </p>
+                <button className="hover:text-green-500" onClick={()=>adicionar(item)}><IoMdAddCircleOutline size={30}/></button>
+              </div>
             </section>
-           </Link>
+          
           );
         })}
       </main>
