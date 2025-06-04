@@ -42,7 +42,7 @@ export function Register() {
         displayName: data.name
       })
 
-      navigate("/login") // Redireciona após registro
+      navigate("/login")
     } catch (error) {
       console.error("Erro ao registrar:", error)
       alert("Erro ao registrar. Verifique os dados ou tente novamente.")
@@ -69,7 +69,7 @@ export function Register() {
               name="name"
               error={errors.name?.message}
               register={register}
-              maxLength={14} // limite máximo de 14 letras na digitação
+              maxLength={14} 
             />
 
             <Input

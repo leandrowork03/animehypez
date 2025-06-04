@@ -1,4 +1,3 @@
-// src/pages/profile/index.tsx
 import { useEffect, useState, useContext } from "react";
 import { Container } from "../../components/container";
 import { Panel } from "../../components/panelheader";

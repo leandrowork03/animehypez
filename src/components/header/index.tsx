@@ -1,4 +1,3 @@
-// Header.tsx
 import { Link } from 'react-router-dom';
 import { CiLogin } from 'react-icons/ci';
 import { FaRegUserCircle } from 'react-icons/fa';

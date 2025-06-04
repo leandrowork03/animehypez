@@ -1,4 +1,3 @@
-// src/pages/profile/edit.tsx
 import { useState, useEffect, useContext, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container } from "../../../components/container";

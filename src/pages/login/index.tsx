@@ -33,7 +33,7 @@ export function Login() {
 
     try {
       await signInWithEmailAndPassword(Auth, data.email, data.password)
-      navigate("/") // Redireciona após login
+      navigate("/")
     } catch (error) {
       console.error("Erro ao fazer login:", error)
       alert("Erro ao fazer login. Verifique suas credenciais.")
