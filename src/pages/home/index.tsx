@@ -11,6 +11,9 @@ import toast from "react-hot-toast";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import dbz from '../../assets/dbz.png'
+import cdz from '../../assets/cdz.png'
+import yuyu from '../../assets/yuyu.png'
 
 export interface animeProps {
   mal_id: number;
@@ -77,7 +80,7 @@ export function Home() {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
@@ -87,25 +90,25 @@ export function Home() {
   return (
     <div>
       <Container>
-        <header
-          className="px-15 py-5 "
-          style={{ backgroundColor: "rgba(0, 0, 0, 0.95)" }}
-        >
-          <Slider {...settings} className="my-10">
-            {anime.slice(0, 10).map((item) => (
-              <div key={item.mal_id} className="px-2">
-                <img
-                  src={item.images.jpg.image_url}
-                  alt={item.title}
-                  className="w-full h-60 object-cover rounded-lg"
-                />
-                <h3 className="text-white text-center mt-2 font-bold">
-                  {item.title}
-                </h3>
+     
+      <header className="px-10 mt-1 bg-black pt-1 pb-1">
+               <Slider {...settings} className="my-10 flex">
+            
+              <div>
+              <img src={dbz} alt="" />   
               </div>
-            ))}
+            
+              <div>
+              <img src={cdz} alt="" />   
+              </div>
+            
+              <div>
+              <img src={yuyu} alt="" />   
+              </div>
+           
           </Slider>
-        </header>
+      </header>
+
 
         <div className="pt-20">
           <section
