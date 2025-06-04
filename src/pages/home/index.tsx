@@ -91,7 +91,7 @@ export function Home() {
     <div>
       <Container>
      
-      <header className="px-10 mt-1 bg-black pt-1 pb-1">
+     <header className="px-10 mt-1 bg-black pt-1 pb-1 hidden md:block">
                <Slider {...settings} className="my-10 flex">
             
               <div>
@@ -206,7 +206,7 @@ export function Home() {
                   <div className="flex gap-3 items-center">
                     <p>Add to favorities? </p>
                     <button
-                      className="hover:text-green-500"
+                      className="hover:text-green-500 cursor-pointer"
                       onClick={() => adicionar(item)}
                     >
                       <IoMdAddCircleOutline size={30} />

@@ -65,10 +65,11 @@ export function Header() {
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="text-black flex items-center gap-2"
+          className="text-black flex items-center gap-2 cursor-pointer" 
         >
           <span className="hidden sm:inline truncate max-w-[120px]">
-            {user?.name || user?.email}
+            {user?.name ? user.name.charAt(0).toUpperCase() + user.name.slice(1)
+              : "Nome não disponível"}
           </span>
 
           {avatar ? (
@@ -86,7 +87,7 @@ export function Header() {
       {menuOpen && (
         <nav
           ref={menuRef}
-          className="absolute right-3 mt-0 w-48 bg-white rounded shadow-lg text-black flex flex-col"
+          className="absolute right-30 mt-0 w-48 bg-white rounded shadow-lg text-black flex flex-col"
           role="menu"
           aria-label="Menu do usuário"
         >
