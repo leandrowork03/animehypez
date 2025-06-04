@@ -6,6 +6,7 @@ import { RouterProvider } from "react-router-dom";
 import AuthProvider from "./contexts/authContext";
 import AnimeProvider from "./contexts/animeContext";
 import { Toaster } from "react-hot-toast";
+import "keen-slider/keen-slider.min.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

@@ -64,7 +64,7 @@ export function Profile() {
         {animeGt ?( 
 
          <div className="mt-15">
-            <h1 className="text-2xl font-black text-white">Minha lista de Animes</h1> 
+            <h1 className="text-2xl font-black text-white">My favorities animes</h1> 
          </div>
 
         ):(null) } 
