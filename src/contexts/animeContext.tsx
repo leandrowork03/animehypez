@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
 import type { animeProps } from "../pages/home";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
-interface animeContextData{
-    animez: anymeProps[],
-    animeGt:number,
-    addItem: (item:animeProps)=>void,
-    removeItem:(item:animeProps)=>void,
+interface animeContextData {
+  animez: anymeProps[];
+  animeGt: number;
+  addItem: (item: animeProps) => void;
+  removeItem: (item: animeProps) => void;
 }
 
 interface anymeProps {
@@ -22,43 +22,53 @@ interface anymeProps {
   status: string;
   rating: string;
   score: number;
-  synopsis:string
-  amount: number
+  synopsis: string;
+  amount: number;
 }
 
-interface animeContextProps{
-    children: ReactNode
+interface animeContextProps {
+  children: ReactNode;
 }
 
-export const AnimeContext = createContext({} as animeContextData)
+export const AnimeContext = createContext({} as animeContextData);
 
-export default function AnimeProvider({children}:animeContextProps){
-    const [animez, setAnimez] = useState<anymeProps[]>([])
+export default function AnimeProvider({ children }: animeContextProps) {
+  const [animez, setAnimez] = useState<anymeProps[]>([]);
+
+  useEffect(() => {
+    const storedAnimes = localStorage.getItem("favoritedAnimes");
+    if (storedAnimes) {
+      setAnimez(JSON.parse(storedAnimes));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("favoritedAnimes", JSON.stringify(animez));
+  }, [animez]);
 
   function addItem(item: animeProps) {
-  const alreadyExists = animez.some(e => e.mal_id === item.mal_id);
+    const alreadyExists = animez.some((e) => e.mal_id === item.mal_id);
 
-  if (alreadyExists) return;
+    if (alreadyExists) return;
 
-  const newItem: anymeProps = {
-    ...item,
-    amount: 1,
-  };
+    const newItem: anymeProps = {
+      ...item,
+      amount: 1,
+    };
 
-  setAnimez([...animez, newItem]);
-}
+    setAnimez([...animez, newItem]);
+  }
 
-
-    function removeItem(item: animeProps){
+  function removeItem(item: animeProps) {
     const filteredAnimez = animez.filter((e) => e.mal_id !== item.mal_id);
-        setAnimez(filteredAnimez);
-        
-    }
+    setAnimez(filteredAnimez);
+  }
 
-
-    return(
-        <AnimeContext.Provider value={{animez, addItem, removeItem, animeGt: animez.length}}>
-            {children}
-        </AnimeContext.Provider>
-    )
+  return (
+    <AnimeContext.Provider
+      value={{ animez, addItem, removeItem, animeGt: animez.length }}
+    >
+      {children}
+    </AnimeContext.Provider>
+  );
 }

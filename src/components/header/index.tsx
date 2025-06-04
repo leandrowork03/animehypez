@@ -5,8 +5,10 @@ import { useContext, useEffect, useRef, useState } from 'react';
 
 import logoImg from '../../assets/logodbz.png';
 import { AuthContext } from '../../contexts/authContext';
+import { AnimeContext } from '../../contexts/animeContext';
 
 export function Header() {
+  const {animeGt} =useContext(AnimeContext)
   const { user, logout } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const [avatar, setAvatar] = useState<string | null>(null);
@@ -36,7 +38,6 @@ export function Header() {
     };
   }, []);
 
-  // Fecha o menu ao clicar fora dele
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       const target = event.target as Node;
@@ -65,12 +66,15 @@ export function Header() {
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="text-black flex items-center gap-2 cursor-pointer" 
+          className="text-black flex items-center gap-2 cursor-pointerc relative" 
         >
           <span className="hidden sm:inline truncate max-w-[120px]">
             {user?.name ? user.name.charAt(0).toUpperCase() + user.name.slice(1)
-              : "Nome não disponível"}
+              : "carregando..."}
           </span>
+          {animeGt > 0 &&(
+            <span className="absolute bg-sky-400 -right-1 -top-1 text-white text-xs px-1 rounded-full">{animeGt}</span>
+          )}
 
           {avatar ? (
             <img

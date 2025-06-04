@@ -67,16 +67,16 @@ export function Register() {
               type="text"
               placeholder="Digite seu nome"
               name="name"
-              error={errors.name?.message}
+              error={errors.name?.message || ""}
               register={register}
-              maxLength={14} 
+              
             />
 
             <Input
               type="email"
               placeholder="Digite seu e-mail"
               name="email"
-              error={errors.email?.message}
+              error={errors.email?.message || ""}
               register={register}
             />
 
@@ -84,7 +84,7 @@ export function Register() {
               type="password"
               placeholder="Digite sua senha"
               name="password"
-              error={errors.password?.message}
+              error={errors.password?.message || ""}
               register={register}
             />
 

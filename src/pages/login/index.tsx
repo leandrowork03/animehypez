@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { Auth } from '../../services/firebaseConnections'
 import { signInWithEmailAndPassword } from 'firebase/auth'
+import toast from 'react-hot-toast'
 
 const schema = z.object({
   email: z.string().email("Digite um email válido").nonempty("Email é obrigatório"),
@@ -36,7 +37,7 @@ export function Login() {
       navigate("/")
     } catch (error) {
       console.error("Erro ao fazer login:", error)
-      alert("Erro ao fazer login. Verifique suas credenciais.")
+      toast.error("usuário não encontrado, confira email e senha")
     }
 
     setLoading(false)
@@ -58,14 +59,14 @@ export function Login() {
               type="email"
               placeholder="Digite seu e-mail"
               name="email"
-              error={errors.email?.message}
+              error={errors.email?.message || ""}
               register={register}
             />
             <Input
               type="password"
               placeholder="Digite sua senha"
               name="password"
-              error={errors.password?.message}
+              error={errors.password?.message || ""}
               register={register}
             />
 

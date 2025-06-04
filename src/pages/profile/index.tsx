@@ -26,71 +26,65 @@ export function Profile() {
   }, [user]);
 
   function remover(item: animeProps) {
-    toast.error("Anime removed")
+    toast.error("Anime removed");
     removeItem(item);
   }
 
   return (
     <Container>
       <Panel />
-      <div className="p-10" style={{ backgroundColor: 'rgba(0, 0, 0, 0.95)' }}>
+      <div className="p-10" style={{ backgroundColor: "rgba(0, 0, 0, 0.95)" }}>
         <header className="text-white w-full flex flex-col items-start gap-3 border-b border-white pb-4">
           {avatar ? (
-            <img src={avatar} alt="Avatar" className="w-24 h-24 rounded-full border-2 border-white" />
+            <img
+              src={avatar}
+              alt="Avatar"
+              className="w-24 h-24 rounded-full border-2 border-white"
+            />
           ) : (
             <p className="text-white">Nenhum avatar selecionado</p>
           )}
           <h2 className="font-black text-2xl">
             {user?.name
               ? user.name.charAt(0).toUpperCase() + user.name.slice(1)
-              : "Nome não disponível"}
+              : "Recarregue a página"}
           </h2>
         </header>
 
-          {user?.bio && ( 
+        {bio && (
+          <div className="mt-5 max-w-xs">
+            <h2 className="text-white text-2xl">Bio</h2>
+            <p className="text-white mt-1 italic">{bio}</p>
+          </div>
+        )}
 
-          <div className="mt-5 max-w-xs"> 
+        <main>
+          {animeGt ? (
+            <div className="mt-15">
+              <h1 className="text-2xl font-black text-white">My favorities animes</h1>
+            </div>
+          ) : null}
 
-            <h2 className="text-white text-2xl">Bio</h2> 
+          {animez.map((item) => (
+            <div
+              className="flex items-center justify-around py-10"
+              key={item.mal_id}
+            >
+              <img
+                src={item.images.jpg.image_url}
+                alt=""
+                className="h-20 w-20 rounded-full"
+              />
+              <p className="text-white font-black wrap">{item.title}</p>
 
-            <p className="text-white mt-1 italic">{user.bio}</p> 
-
-          </div> 
-
-        )} 
-
-
-      <main> 
-
-        {animeGt ?( 
-
-         <div className="mt-15">
-            <h1 className="text-2xl font-black text-white">My favorities animes</h1> 
-         </div>
-
-        ):(null) } 
-
-        {animez.map((item)=>( 
-
-          <div className="flex items-center justify-around py-10" key={item.mal_id}> 
-
-           
-
-        <img src={item.images.jpg.image_url} alt="" className="h-20 w-20 rounded-full" /> 
-
-        <p className="text-white font-black wrap">{item.title}</p> 
-
- 
-
-        <button className="text-white hover:text-red-600" onClick={()=>remover(item)}> 
-
-          <IoMdRemoveCircleOutline size={30}/> 
-
-        </button> 
-
-        </div> 
-
-        ))} 
+              <button
+                className="text-white hover:text-red-600"
+                onClick={() => remover(item)}
+              >
+                <IoMdRemoveCircleOutline size={30} />
+              </button>
+            </div>
+          ))}
         </main>
       </div>
     </Container>
