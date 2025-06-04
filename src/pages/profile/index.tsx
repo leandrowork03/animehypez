@@ -48,7 +48,7 @@ export function Profile() {
           <h2 className="font-black text-2xl">
             {user?.name
               ? user.name.charAt(0).toUpperCase() + user.name.slice(1)
-              : "Recarregue a página"}
+              : "Wellcome"}
           </h2>
         </header>
 
