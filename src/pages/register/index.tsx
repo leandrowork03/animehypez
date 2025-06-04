@@ -7,6 +7,7 @@ import { Input } from '../../components/input'
 import { useState } from 'react'
 import { Auth } from '../../services/firebaseConnections'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
+import toast from 'react-hot-toast'
 
 const schema = z.object({
   name: z
@@ -41,6 +42,7 @@ export function Register() {
       await updateProfile(userCredential.user, {
         displayName: data.name
       })
+          toast.success("Cadastrado com sucesso!");
 
       navigate("/login")
     } catch (error) {
