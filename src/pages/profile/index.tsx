@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import empty from '../../assets/empty.jpg'
 
 export function Profile() {
-  const { removeItem, animez, animeGt } = useContext(AnimeContext);
+  const { removeItem, animez } = useContext(AnimeContext);
   const { user } = useContext(AuthContext);
   const [avatar, setAvatar] = useState<string | null>(null);
   const [bio, setBio] = useState<string>("");

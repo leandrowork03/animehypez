@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { CiLogin } from 'react-icons/ci';
-import { FaRegUserCircle } from 'react-icons/fa';
 import { useContext, useEffect, useRef, useState } from 'react';
 
 import logoImg from '../../assets/logodbz.png';
