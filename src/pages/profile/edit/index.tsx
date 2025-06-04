@@ -1,4 +1,5 @@
-import { useState, useEffect, useContext, ChangeEvent } from "react";
+import { useState, useEffect, useContext } from "react";
+import type { ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container } from "../../../components/container";
 import { Panel } from "../../../components/panelheader";
