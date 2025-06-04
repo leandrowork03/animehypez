@@ -1,54 +1,50 @@
-# React + TypeScript + Vite
+# AnimeHypez 🎌
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação web para fãs de animes, permitindo explorar títulos, buscar por obras, salvar favoritos, editar perfil com avatar e bio personalizados — tudo com autenticação segura via Firebase.
 
-Currently, two official plugins are available:
+## 🚀 Tecnologias Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React** + **TypeScript**
+- **Vite**
+- **Tailwind CSS**
+- **Firebase (Authentication + Firestore)**
+- **React Router DOM**
+- **React Hook Form** + **Zod** para validação de formulários
+- **React Hot Toast** para notificações
+- **React Slick** para sliders
 
-## Expanding the ESLint configuration
+## 🔐 Funcionalidades
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🔑 **Cadastro e login** com autenticação via Firebase
+- 🔒 **Rotas protegidas** com controle de acesso
+- 🔁 **Sistema de busca** de animes
+- ⭐ **Favoritar e gerenciar animes**
+- ✍️ **Perfil editável** com:
+  - Avatar customizável (upload ou escolha de avatar)
+  - Campo de bio
+- 📁 **Persistência de dados** no Firestore
+- ✅ **Formulários com validação robusta** via React Hook Form + Zod
+- 📦 **Context API** para estados globais (auth + dados)
+- 📱 Interface 100% **responsiva** e moderna com Tailwind
+- 🔔 Feedback ao usuário com React Hot Toast
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 📂 Estrutura do Projeto
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- `src/contexts`: Auth e dados de animes
+- `src/pages`: Home, Login, Registro, Detalhes, Perfil, Editar Perfil
+- `src/components`: Sliders, formulários, botões, avatares, etc.
+- `src/services`: Integração com Firebase
+- `src/utils`: Funções auxiliares (ex: formatadores)
+- `src/validations`: Schemas Zod para validação de dados
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🖼️ Demonstração
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+> (Adicione aqui um GIF ou link para vídeo no YouTube mostrando as funcionalidades)
+
+## 📦 Como Rodar Localmente
+
+```bash
+git clone https://github.com/leandrowork03/animehypez.git
+cd animehypez
+npm install
+npm run dev
