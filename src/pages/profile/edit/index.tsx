@@ -7,6 +7,7 @@ import luffy from '../../../assets/luffy.jpg';
 import naruto from '../../../assets/naruto.jpg';
 import empty from '../../../assets/empty.jpg';
 import { AuthContext } from "../../../contexts/authContext";
+import toast from "react-hot-toast";
 
 const avatars = [goku, luffy, naruto, empty];
 
@@ -39,7 +40,7 @@ export function Edit() {
     setSelectedAvatar(avatar);
     setUploadedAvatar(null);
     localStorage.setItem("profileAvatar", avatar);
-    alert("Avatar salvo com sucesso!");
+    toast.success('updated profile picture!')
   }
 
   function handleUploadAvatar(e: ChangeEvent<HTMLInputElement>) {
@@ -51,7 +52,7 @@ export function Edit() {
         setUploadedAvatar(base64);
         setSelectedAvatar(base64);
         localStorage.setItem("profileAvatar", base64);
-        alert("Avatar enviado e salvo com sucesso!");
+        toast.success('updated profile picture!')
       };
       reader.readAsDataURL(file);
     }
@@ -61,7 +62,7 @@ export function Edit() {
     if (user?.uid) {
       localStorage.setItem(`bio_${user.uid}`, bio);
       setUser((prev) => prev ? { ...prev, bio } : prev);
-      alert("Bio salva com sucesso!");
+     toast.success('Saved bio')
       navigate("/profile");
     }
   }

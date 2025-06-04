@@ -4,8 +4,13 @@ import type { animeProps } from "../home"
 import { useEffect, useState } from "react"
 import { LuPopcorn } from "react-icons/lu"
 import { TbRating18Plus } from "react-icons/tb"
+import { IoMdAddCircleOutline } from "react-icons/io";
+import { useContext } from "react"
+import { AnimeContext } from "../../contexts/animeContext"
+import toast from "react-hot-toast"
 
 export function Details() {
+  const {addItem} = useContext(AnimeContext)
   const [anime, setAnime] = useState<animeProps>()
   const [loading, setLoading] = useState(true)
   const { mal_id } = useParams()
@@ -24,6 +29,11 @@ export function Details() {
     };
     List()
   }, [mal_id]);
+
+  function adicionar(anime:animeProps){
+    toast.success('Add to your favs')
+    addItem(anime)
+  }
 
   let proofNote;
   let age;
@@ -66,7 +76,7 @@ export function Details() {
 
         {anime && (
           <div className="flex flex-col md:flex-row gap-4 py-10">
-            <div className="flex-1 text-center bg-black py-10 w-fit h-fit rounded-lg">
+            <div className="flex-1 text-center bg-black py-10 w-full h-fit rounded-lg">
               <img
                 src={anime.images.jpg.image_url}
                 alt={anime.title}
@@ -87,6 +97,14 @@ export function Details() {
               <h1 className="text-2xl font-bold">{anime.title}</h1>
               <h2 className="text-lg italic mb-2">{anime.title_japanese}</h2>
               <p className="py-5">{anime.synopsis}</p>
+             <div className="flex items-center gap-3">
+               <h2 className="text-2xl font-black">Add to your favs</h2>
+              <button 
+              onClick={()=>adicionar(anime)}
+              className="hover:text-green-500">
+                <IoMdAddCircleOutline size={30}/>
+              </button>
+             </div>
             </div>
           </div>
         )}

@@ -5,6 +5,7 @@ import { AuthContext } from "../../contexts/authContext";
 import { AnimeContext } from "../../contexts/animeContext";
 import type { animeProps } from "../home";
 import { IoMdRemoveCircleOutline } from "react-icons/io";
+import toast from "react-hot-toast";
 
 export function Profile() {
   const { removeItem, animez, animeGt } = useContext(AnimeContext);
@@ -25,6 +26,7 @@ export function Profile() {
   }, [user]);
 
   function remover(item: animeProps) {
+    toast.error("Anime removed")
     removeItem(item);
   }
 
