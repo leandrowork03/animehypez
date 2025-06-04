@@ -6,6 +6,7 @@ import { AnimeContext } from "../../contexts/animeContext";
 import type { animeProps } from "../home";
 import { IoMdRemoveCircleOutline } from "react-icons/io";
 import toast from "react-hot-toast";
+import empty from '../../assets/empty.jpg'
 
 export function Profile() {
   const { removeItem, animez, animeGt } = useContext(AnimeContext);
@@ -42,7 +43,7 @@ export function Profile() {
               className="w-24 h-24 rounded-full border-2 border-white"
             />
           ) : (
-            <p className="text-white">Nenhum avatar selecionado</p>
+            <img src={empty} alt="" className="w-24 h-24 rounded-full border-2 border-white"/>
           )}
           <h2 className="font-black text-2xl">
             {user?.name

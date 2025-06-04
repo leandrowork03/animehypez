@@ -6,6 +6,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import logoImg from '../../assets/logodbz.png';
 import { AuthContext } from '../../contexts/authContext';
 import { AnimeContext } from '../../contexts/animeContext';
+import empty from '../../assets/empty.jpg'
 
 export function Header() {
   const {animeGt} =useContext(AnimeContext)
@@ -83,7 +84,7 @@ export function Header() {
               className="w-9 h-9 rounded-full border-2 border-black object-cover"
             />
           ) : (
-            <FaRegUserCircle size={35} />
+            <img src={empty} alt=""  className="w-9 h-9 rounded-full border-2 border-black object-cover"/>
           )}
         </button>
       </nav>
