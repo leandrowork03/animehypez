@@ -2,7 +2,7 @@
 
 Aplicação web para fãs de animes, permitindo explorar títulos, buscar por obras, salvar favoritos, editar perfil com avatar e bio personalizados — tudo com autenticação segura via Firebase.
 
-## 🚀 Tecnologias Utilizadas
+## 🚀 Tecnologias Utilizadas 
 
 - **React** + **TypeScript**
 - **Vite**
